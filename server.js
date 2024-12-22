@@ -6,7 +6,12 @@ const cors = require('cors');
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+
+// Enable CORS for your frontend URL only
+const allowedOrigins = ['https://blog-crud-frontend.vercel.app'];
+app.use(cors({
+  origin: allowedOrigins,
+}));
 
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
@@ -14,7 +19,6 @@ mongoose.connect(process.env.MONGODB_URI, {
 })
   .then(() => console.log('Connected to MongoDB Atlas'))
   .catch((err) => console.error('Failed to connect to MongoDB Atlas:', err));
-
 
 const User = mongoose.model(
   'User',
