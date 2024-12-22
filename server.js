@@ -8,14 +8,14 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-mongoose.connect('mongodb://bamaniyamilan108:Leq0MYgNh3lFwWeJ@cluster0.abcde.mongodb.net/?ssl=true&replicaSet=atlas-atu1xj-shard-0&authSource=admin&retryWrites=true&w=majority&appName=Cluster0', {
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
   .then(() => console.log('Connected to MongoDB Atlas'))
   .catch((err) => console.error('Failed to connect to MongoDB Atlas:', err));
 
-  
+
 const User = mongoose.model(
   'User',
   new mongoose.Schema({
